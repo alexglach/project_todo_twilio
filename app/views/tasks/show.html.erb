@@ -1,11 +1,16 @@
-<h1><%=@task.name%></h1>
+<h1><%= @task.name %></h1>
 
 <h3>Description:</h3>
-<p><%=@task.description%></p>
+<p><%= @task.description %></p>
 
 <h4>Complete By:</h4>
-<p><%=@task.date%></p>
+<p><%= @task.complete ? "Done" : @task.date %></p>
 
 <h3><%= link_to "Edit This Task", edit_task_path(@task.id) %></h3>
+
+<h3>
+<% link_name = @task.complete ? "Redo" : "Mark as Done" %>
+<%= link_to link_name, complete_path(@task.id), :method => :patch %>
+</h3>
 
 <h3><%= link_to "Delete This Task", task_path, :method => :delete %></h3>

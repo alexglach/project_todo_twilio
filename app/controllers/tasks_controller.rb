@@ -51,7 +51,7 @@ class TasksController < ApplicationController
 
   def complete
     @task = Task.find(params[:id])
-    @task.complete = true
+    @task.complete = !@task.complete
     if @task.save
       flash[:success] = "#{@task.name} has been marked as complete"
       redirect_to tasks_path

@@ -12,7 +12,6 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-
   end
 
   def create
@@ -55,7 +54,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.complete = !@task.complete
     if @task.save
-      flash[:success] = "#{@task.name} has been marked as complete"
+      flash[:success] = "#{@task.name} has been updated"
       redirect_to tasks_path
     else
       flash.now[:error] = "That task can't be marked for completion"
@@ -79,8 +78,12 @@ class TasksController < ApplicationController
     case sort_param
     when :date
       @tasks = Task.all.sort_by &:date
+    when :reverse_date
+      @tasks = Task.all.sort_by(&:date).reverse
     when :ascending_priority
       @tasks = Task.all.sort {|a, b| a.priority && b.priority ? a.priority <=> b.priority : a.priority ? -1 : 1 }
+    when :descending_priority
+      @tasks = Task.all.sort {|b, a| a.priority && b.priority ? a.priority <=> b.priority : a.priority ? 1 : -1 }
     end  
   end
 

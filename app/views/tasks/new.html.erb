@@ -2,5 +2,7 @@
 
 <%= form_for @task do |f| %>
 <%= render :partial => "task_form", :locals => {:f => f} %>
+<%= f.label :priority %>
+<%= f.select(:priority, (1..Task.all.length+1).to_a - Task.all.map(&:priority)+ [@task.priority, nil])  %>
 <%= f.submit "Create" %>
 <% end %>

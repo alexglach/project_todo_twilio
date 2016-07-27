@@ -2,12 +2,14 @@
 
 
 
-<p>Sort by:</p>
-<ul style='display:inline-block'>
-<li><%= link_to "Ascending Priority", tasks_path(:sort_param => :ascending_priority) %></li>
-<li><%= link_to "Descending Priority", tasks_path(:sort_param => :descending_priority) %></li>
 
+<ul> Sort by:
+<li style='display:inline-block'><%= link_to "Ascending Priority", tasks_path(:sort_param => :ascending_priority) %></li>
+<li style='display:inline-block'><%= link_to "Descending Priority", tasks_path(:sort_param => :descending_priority) %></li>
+<li style='display:inline-block'><%= link_to "Ascending Date", tasks_path(:sort_param => :date) %></li>
+<li style='display:inline-block'><%= link_to "Descending Date", tasks_path(:sort_param => :reverse_date) %></li>
 </ul>
+
 
 
 <% @tasks.each do |task| %>

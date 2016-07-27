@@ -1,6 +1,8 @@
 <h1>Edit Task</h1>
 
 <%= form_for @task do |f| %>
-<%= render :partial => "task_form", :locals => {:f => f} %>
-<%= f.submit "Update Task" %>
+  <%= render :partial => "task_form", :locals => {:f => f} %>
+  <%= f.label :priority %>
+    <%= f.select(:priority, (1..Task.all.length).to_a - Task.all.map(&:priority)+ [@task.priority, nil])  %>
+  <%= f.submit "Update Task" %>
 <% end %>

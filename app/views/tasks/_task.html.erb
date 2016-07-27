@@ -1,8 +1,9 @@
 <p>
 <%= "<del>".html_safe if task.complete %>
-<%= task.name %> Complete By: <%= task.date %> <%= "Priority:" if task.priority  %><%= task.priority %>
+<strong><%= task.name %></strong> <br>
+Complete By: <em><%= task.date %></em> <%= "Priority:" if task.priority  %><strong><%= task.priority %></strong>
 <%= "</del>".html_safe if task.complete %>
-
+<br>
 <%= link_to "View Task", task_path(task.id) %>
 <%= link_to "Edit Task", edit_task_path(task.id) %>
 <% link_name = task.complete ? "Redo" : "Mark as Done" %>

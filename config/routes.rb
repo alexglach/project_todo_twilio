@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :tasks
 
   patch "/complete/:id" => 'tasks#complete', :as => :complete 
+
+  get "/send_text/:id" => 'texts#send_text', :as => :send_text
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

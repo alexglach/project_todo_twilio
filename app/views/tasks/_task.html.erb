@@ -8,5 +8,6 @@
 <% link_name = task.complete ? "Redo" : "Mark as Done" %>
 <%= link_to link_name, complete_path(task.id), :method => :patch %>
 <%= link_to "Delete This Task", task_path(task.id), :method => :delete %>
+<%= link_to "Send me a message", send_text_path(task.id) %>
 
 </p>

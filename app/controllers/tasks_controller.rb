@@ -41,12 +41,24 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update(whitelisted_params)
-    flash[:success] = "#{@task.name} has been updated"
-    redirect_to task_path(@task.id)
-  else
-    flash.now[:error] = "Your description must be at least 4 characters"
-    render :edit
+      flash[:success] = "#{@task.name} has been updated"
+      redirect_to task_path(@task.id)
+    else
+      flash.now[:error] = "Your description must be at least 4 characters"
+      render :edit
+    end
   end
+
+  def complete
+    @task = Task.find(params[:id])
+    @task.complete = true
+    if @task.save
+      flash[:success] = "#{@task.name} has been marked as complete"
+      redirect_to tasks_path
+    else
+      flash.now[:error] = "That task can't be marked for completion"
+      render :index
+    end
   end
 
 

@@ -1,1 +1,4 @@
-<p><%= task.name %> Completion Date: <%= task.date %></p><br />
+<p><%= task.name %> Complete By: <%= task.date %>
+
+<%= link_to "View Task", task_path(task.id) %>
+</p><br />

@@ -1,0 +1,4 @@
+<h1>Your tasks:</h1>
+<% @tasks.each do |task| %>
+  <%= render :partial => "task", :locals => {:task => task} %>
+<% end %>

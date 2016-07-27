@@ -2,4 +2,8 @@
 
 <%= link_to "View Task", task_path(task.id) %>
 <%= link_to "Edit Task", edit_task_path(task.id) %>
+<%= link_to "Mark as Done", complete_path(task.id) %>
+
+<%= link_to "Delete This Task", task_path(task.id), :method => :delete %>
+
 </p><br />

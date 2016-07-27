@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-
+ 
   def index
     @tasks = Task.all.sort_by &:date
   end
@@ -15,14 +15,19 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(whitelisted_params)
-    @task.save
-    flash[:success] = "Your task has been saved!"
-    redirect_to task_path(@task.id)
+
+    if @task.save
+      flash[:success] = "Your task has been saved!"
+      redirect_to task_path(@task.id)
+    else
+      flash.now[:error] = "Your description must be at least 4 characters"
+      render :new
+    end
   end
 
   def destroy
     @task = Task.find(params[:id])
-    flash[:success] = "#{@task.name} "
+    flash[:success] = "#{@task.name} has been deleted"
     @task.destroy
 
     redirect_to tasks_path
@@ -35,8 +40,13 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    @task.update(whitelisted_params)
+    if @task.update(whitelisted_params)
+    flash[:success] = "#{@task.name} has been updated"
     redirect_to task_path(@task.id)
+  else
+    flash.now[:error] = "Your description must be at least 4 characters"
+    render :edit
+  end
   end
 
 

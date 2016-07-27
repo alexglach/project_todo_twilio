@@ -1,6 +1,6 @@
 <p>
 <%= "<del>".html_safe if task.complete %>
-<%= task.name %> Complete By: <%= task.date %>
+<%= task.name %> Complete By: <%= task.date %> <%= "Priority:" if task.priority  %><%= task.priority %>
 <%= "</del>".html_safe if task.complete %>
 
 <%= link_to "View Task", task_path(task.id) %>

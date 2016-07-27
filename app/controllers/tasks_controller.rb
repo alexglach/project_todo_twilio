@@ -1,7 +1,13 @@
 class TasksController < ApplicationController
  
   def index
-    @tasks = Task.all.sort_by &:date
+    sort_param = params[:sort_param] || session[:sort_param]
+    if sort_param.nil?
+      sort_param = :date
+    end
+    sort_param = sort_param.to_sym
+    sort_list(sort_param)
+    
   end
 
   def show
@@ -67,5 +73,11 @@ class TasksController < ApplicationController
   def whitelisted_params
     params.require(:task).permit(:name, :description, :date, :priority)
   end
+
+  def sort_list(sort_param)
+    session[:sort_param] = sort_param
+    @tasks = Task.all.sort {|a, b| a.sort_param && b.sort_param ? a.sort_param <=> b.sort_param : a.sort_param ? -1 : 1 }
+  end
+
 
 end

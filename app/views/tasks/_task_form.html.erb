@@ -6,4 +6,7 @@
 <br>
 <%= f.label :date %>
 <%= f.date_select :date %>
+
+<%= f.label :priority %>
+<%= f.select(:priority, (1..Task.all.length).to_a)  %>
 <br>

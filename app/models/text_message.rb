@@ -1,11 +1,11 @@
 class TextMessage
 
   def initialize(task, date)
-    @from = ENV['TWILIO']
-    @to = ENV['SELF']
+    @from = ENV['from']
+    @to = ENV['to']
     @body = "You need to complete #{task} by #{date}."
-    account_sid = ENV['ACCOUNT_SID']
-    auth_token = ENV['AUTH_TOKEN']
+    account_sid = ENV['account_sid']
+    auth_token = ENV['auth_token']
     @client = Twilio::REST::Client.new account_sid, auth_token
   end
 

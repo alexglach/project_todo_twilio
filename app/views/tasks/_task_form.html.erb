@@ -8,6 +8,6 @@
 <%= f.date_select :date %>
 
 <%= f.label :priority %>
-<%= f.select(:priority, (1..Task.all.length).to_a - Task.all.map(&:priority)+ [@task.priority, nil])  %>
+<%= f.select(:priority, (1..Task.all.length+1).to_a - Task.all.map(&:priority)+ [@task.priority, nil])  %>
 <br>
 

@@ -1,5 +1,15 @@
 <h1>Your tasks:</h1>
-<p>Sort by:<%= link_to "Ascending Priority", tasks_path(:sort_param => :priority) %></p>
+
+
+
+<p>Sort by:</p>
+<ul style='display:inline-block'>
+<li><%= link_to "Ascending Priority", tasks_path(:sort_param => :ascending_priority) %></li>
+<li><%= link_to "Descending Priority", tasks_path(:sort_param => :descending_priority) %></li>
+
+</ul>
+
+
 <% @tasks.each do |task| %>
   <%= render :partial => "task", :locals => {:task => task} %>
 <% end %>

@@ -2,10 +2,6 @@ class TasksController < ApplicationController
  
   def index
     sort_param = params[:sort_param] || session[:sort_param]
-    if sort_param.nil?
-      sort_param = :date
-    end
-    sort_param = sort_param.to_sym
     sort_list(sort_param)
     
   end
@@ -75,8 +71,17 @@ class TasksController < ApplicationController
   end
 
   def sort_list(sort_param)
+    if sort_param.nil?
+      sort_param = :date
+    end
+    sort_param = sort_param.to_sym
     session[:sort_param] = sort_param
-    @tasks = Task.all.sort {|a, b| a.sort_param && b.sort_param ? a.sort_param <=> b.sort_param : a.sort_param ? -1 : 1 }
+    case sort_param
+    when :date
+      @tasks = Task.all.sort_by &:date
+    when :ascending_priority
+      @tasks = Task.all.sort {|a, b| a.priority && b.priority ? a.priority <=> b.priority : a.priority ? -1 : 1 }
+    end  
   end
 
 
